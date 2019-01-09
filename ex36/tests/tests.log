@@ -1,0 +1,12 @@
+DEBUG tests/ex36_tests.c:59:----- RUNNING: ./tests/ex36_tests
+DEBUG tests/ex36_tests.c:55:
+----- test_bfromcstr
+DEBUG tests/ex36_tests.c:59:----- RUNNING: ./tests/ex36_tests
+DEBUG tests/ex36_tests.c:55:
+----- test_bfromcstr
+DEBUG tests/ex36_tests.c:59:----- RUNNING: ./tests/ex36_tests
+DEBUG tests/ex36_tests.c:55:
+----- test_bfromcstr
+DEBUG tests/ex36_tests.c:59:----- RUNNING: ./tests/ex36_tests
+DEBUG tests/ex36_tests.c:55:
+----- test_bfromcstr

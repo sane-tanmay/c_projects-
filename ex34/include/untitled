@@ -1,0 +1,135 @@
+#include "minuint.h"
+#include "darray.h"
+
+
+
+static DArray *array= NULL; 
+
+static int *val1=NULL;
+static int *val2=NULL;
+
+char *test_create()
+{
+array=DArray_create(sizeof(int), 100);
+mu_assert(array!=NULL, "DArray creation failed ");
+mu_assert(array->contents!=NULL, "contents are NULL in darray Gott"); 
+mu_assert(array->end==0, "End index isnt pointing at the right spot "); 
+mu_assert(array->element_size==sizeof(int),"element size is wrong");
+mu_assert(array->max==100, "Max value isnt teh one as expected");
+
+return NULL; 
+
+}
+
+char * test_destroy()
+{
+
+DArray_destroy(array);
+return NULL;
+
+}
+
+char *test_new(){
+
+
+val1=DArray_new(array); 
+mu_assert(va1!=NULL, "failed to make a new element in darray");
+
+val2=DArray_new(array); 
+mu_assert(val2!=NULL, "failed to make a new element in darray");
+
+
+return NULL;
+
+
+}
+
+char *test_set()
+{
+DArray_set(array, 0, va11;
+DArray_set(array, 1, va12;
+return NULL;
+}
+
+
+
+char *test_get()
+{
+mu_assert(DArray_get(array,0)==val1,"Wrong first value");
+mu_assert(DArray_get(array,0)==val2,"Wrong second value");
+return NULL;
+
+}
+
+
+char *test_remove()
+{
+int *val_check=DArray_remove(array, 0); // remove the value at given index
+mu_assert(val_check!=NULL, "Should not get NULL");
+mu_assert(*val_check==*val1, "Should get the return value of the first index");
+//Once the index is removed
+mu_assert(DArray_get(array,0)==NULL, "Should be gone");
+DArray_free(val_check);
+
+val_check=DArray_remove(array, 1); // remove the value at given index
+mu_assert(val_check!=NULL, "Should not get NULL");
+mu_assert(*val_check==*val2, "Should get the return value of the second index");
+//Once the index is removed
+mu_assert(DArray_get(array, 1)==NULL, "Should be gone");
+DArray_free(val_check);
+
+return NULL;
+}
+
+char * test_expand_contract()
+{
+int old_max=DArray_remove(array,0);
+DArray_expand(array);
+mu_assert((unsigned int)array->max==array->expand_rate+1, "Wrong size after expand");
+;
+
+DArray_contract(array);
+mu_assert((unsigned int)array->max==array->expand_rate+1, "Should stay atleast at expand rate");
+
+
+DArray_contract(array);
+mu_assert((unsigned int)array->max==array->expand_rate+1, "Should stay atleast at expand rate");
+;
+return NULL;
+
+}
+
+char * test_push_pop {
+
+int i=0; 
+for(i=0; i<1000;i++){
+int *val=Darray_new(array); 
+*val=i*333; // to the value pointed by thsi one add the value i*333
+DArray_push(array,val); 
+mu_assert(array->max==1201, "Wrong max size");
+}
+
+for(i=999; i>=0;i--){
+int *val=Darray_pop(array); 
+
+mu_assert(val!=NULL, "Shoudnt get NULL);
+mu_assert(*val=i*333, "Wrong value"};
+DArray_free(val);
+}
+
+}
+
+
+char * all_tests()
+{
+mu_run_test(test_create);
+mu_run_test(test_new);
+mu_run_test(test_set);
+mu_run_test(test_get);
+mu_run_test(test_remove);
+mu_run_test(test_expand_contract);
+mu_run_test(test_push_pop);
+mu_run_test(test_destroy);
+}
+
+RUN_TESTS(all_tests);

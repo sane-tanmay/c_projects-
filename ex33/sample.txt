@@ -1,0 +1,157 @@
+/**********************************************************************
+* Algo: Merge Sort 
+* Input : List
+* Output: 0 is Success, 1 is Failed
+/**********************************************************************/
+
+List * List_merge_sort(List *list)
+{
+	if(List_count(list)<=1){
+		return list;}
+	//Divide the list into two parts 
+	List *left=List_create(); //make left list 
+	List *right= List_create(); //make right list 
+	int middle= List_count(list)/2; //get the centre point
+	printf("****The Value of middle is %d\n", middle);
+	
+	
+	LIST_FOREACH(list, first, next,cur)
+	{
+		if(middle>0)
+		{
+			//printf("If -The Value of middle is %d\n", middle);
+			List_push(left,cur->value) ;
+		}
+		else
+		{
+			//printf("Else The Value of middle is %d\n", middle);
+			List_push(right, cur->value);
+		}
+		
+	middle--;
+	}
+	/* Thus our two lists are formed 
+	 * Now to sort these two */
+	 List *sorted_left=List_merge_sort(left);
+	 List *sorted_right=List_merge_sort(right);
+	 
+  //Now to see if the old pointers got changed if they did then it meansn that 
+  // The arrays got sorted, since this is a n resurive fubction it soesny make sense to have 
+  // so musch strah in thebge hennxe we delete * /
+
+if(sorted_left!=left)
+ List_destroy(left); 
+
+if(sorted_right!=right) 
+List_destroy(right);
+
+// Now to merge both of these two arrays in a sorted mannaer
+
+
+return List_merge_in_order(sorted_left, sorted_right); 
+}    
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+List * List_merge(List *left, List *right)
+{
+List *result=List_create(); 
+void *val=NULL; 
+
+while ((List_count(left)>0) || (List_count(right)>0)) // when either of  the DS have  non zerro eles,nets
+{
+	if((List_count(left)>0) && (List_count(right)>0))
+	{    /*Goal is tho pic the smallest-->*/
+		if(strcmp(List_first(left), List_first(right))<=0) // p1=p2 or p1<p2
+		{
+			val=List_shift(left); //Remove from the top of list i.e from the first node onwards..p1<p2, p1 i.e left is smallest 
+		}
+		else   
+		{
+				
+			val=List_shift(right); //Remove from the top of list i.e from the first node onwards  p1>p2 i.e right is smallest
+		}
+		
+		List_push(result,val); // Resultant DS being pop ulated 
+	}
+	else if (List_count(left)>0) // The number of elee ments in the left DS is non zero
+	   {
+		val=List_shift(left);    //so po them from the array and fill these up
+		List_push(result, val); // Resultant DS being populated
+		}
+	else if (List_count(right)>0) // No of elemnts in eight DS is non zero
+	{
+		val=List_shift(right);   //so po them from the array and fill these up
+		List_push(result, val); // Resultant DS being populated
+	}
+	
+}
+
+return result;	
+}
+
+
+#ifndef lcthw_list_h
+#define lcthw_list_h
+#include <stdlib.h> 
+
+
+
+
+
+struct ListNode; 
+typedef struct ListNode
+{
+	struct ListNode *next; 
+	struct ListNode *prev; 
+	void *value; 
+} ListNode; 
+
+
+typedef struct List 
+{
+int count; 
+ListNode* first; 
+ListNode* last;	
+}List; 
+
+List *List_create(); 
+void List_destroy (List *list);
+void List_clear(List *list);
+void List_clear_destroy(List *list);
+
+#define List_count(A) ((A)->count)
+
+/*Add updated macros */
+//#define List_first(A) ((A)->first->value)
+#define List_first(A) ((A)->first !=NULL? (A)->first->value: NULL)
+
+// This is one way, wherein we are not checking for the pointer non zero values.
+// Honestly this macro is mis leading, we are needing to show the value of that pointer by first 
+
+/*Add updated macros */
+//#define List_last(A)  (A->last->value)
+
+
+
+void List_push(List * list, void *value);
+void *List_pop(List * list);
+#define List_last(A) ((A)->last !=NULL? (A)->last->value: NULL)
+void List_unshift(List *list, void *value);
+void *List_shift (List *list); 
+/*To remove a node */
+void * List_remove (List *list, ListNode *node);
+
+#define LIST_FOREACH(L, S, M, V) ListNode *_node = NULL;\
+                                                   ListNode *V = NULL;\
+for(V = _node = L->S; _node != NULL; V = _node = _node->M)
+
+#endif
+
+
+
+

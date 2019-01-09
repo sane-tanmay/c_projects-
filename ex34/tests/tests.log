@@ -1,0 +1,15 @@
+DEBUG tests/darray_tests.c:145:----- RUNNING: ./tests/darray_tests
+DEBUG tests/darray_tests.c:134:
+----- test_create
+DEBUG tests/darray_tests.c:135:
+----- test_new
+DEBUG tests/darray_tests.c:136:
+----- test_set
+DEBUG tests/darray_tests.c:137:
+----- test_get
+DEBUG tests/darray_tests.c:138:
+----- test_remove
+DEBUG tests/darray_tests.c:139:
+----- test_expand_contract
+DEBUG tests/darray_tests.c:142:
+----- test_fun

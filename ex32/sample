@@ -1,0 +1,40 @@
+	void * List_remove(List *list, ListNode *node)
+{
+void * result=NULL;
+check(list->first && list->last, "list is empty"); 
+check(node,"node can't be NULL");
+
+if(node==list->first && node == list->last)
+{list->first=NULL;
+list->last=NULL; 	
+}
+else if(node==list-> first)
+{ 
+	list->first=node->next;
+	check(list->first!=NULL, "Invalid list, somehow got a first that is NULL");
+    list-> first-> prev=NULL;     
+}
+else if(node==list-> last)
+{    printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \n");
+	   printf("This is the part that will get printyed \n");
+	list->last=node->prev;
+	check(list->last!=NULL, "Invalid list, somehow got a next that is NULL");
+    list-> last->next=NULL;  
+       printf("This is the value-> %s \n",node->value );
+}
+else 
+{
+	ListNode *after=node->next; 
+	ListNode *before= node-> prev; 
+	after->prev=before; 
+	before->next=after; 
+}
+
+list->count--;
+result= node->value; 
+ printf("result points to> %s \n", result);
+free(node); 
+error:
+ printf("This should get printed\n");
+return result; 
+}
